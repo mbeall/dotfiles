@@ -42,7 +42,7 @@ brew install wget --with-iri
 #brew install narwhal
 
 # Install more recent versions of some macOS tools.
-brew install vim --override-system-vi
+brew install vim --with-override-system-vi
 brew install homebrew/dupes/grep
 brew install homebrew/dupes/openssh
 brew install homebrew/dupes/screen
@@ -101,6 +101,26 @@ brew install tree
 brew install vbindiff
 brew install webkit2png
 #brew install zopfli
+
+# Install other tools I need
+brew install composer
+brew install curl
+brew install doctl
+brew install hub
+brew install nghttp2
+brew install perl
+brew install php70-xdebug
+brew install phpunit
+brew install python
+brew install ruby
+brew install homebrew/dupes/srm
+brew link srm --force
+
+# Replace system shells
+# Don't forget to change /etc/shells
+brew install ksh
+brew install tcsh
+brew install zsh
 
 # Remove outdated versions from the cellar.
 brew cleanup
