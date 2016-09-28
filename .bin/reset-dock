@@ -1,0 +1,8 @@
+#!/usr/local/bin/bash
+#
+# Reset Dock to factory defaults
+#
+
+defaults delete com.apple.dock
+killall Dock
+

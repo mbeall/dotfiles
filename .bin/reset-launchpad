@@ -1,0 +1,8 @@
+#!/usr/local/bin/bash
+#
+# Reset Dock to factory defaults
+#
+
+defaults write com.apple.dock ResetLaunchPad -bool true
+killall Dock
+

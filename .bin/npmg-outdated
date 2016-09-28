@@ -1,0 +1,17 @@
+#!/usr/local/bin/bash
+#
+# Make sure all npm dependencies are up to date
+#
+
+status=$(echo /tmp/npmg-outdated-$(date +%Y-%m-%d-%H-%M-%S))
+
+for repo in $(cat ~/.local/npm-repositories | grep mbeall)
+do
+  cd $repo
+  echo $(basename $repo) >> $status
+  npm outdated >> $status
+  echo >> $status
+done
+
+less $status
+

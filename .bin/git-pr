@@ -1,0 +1,20 @@
+#!/usr/local/bin/bash
+#
+# Batch pull request for specific repository
+#
+# 1. Merge starverte:master into mbeall:master
+# 2. Merge mbeall:master into starverte:dev
+# 3. Merge starverte:dev into starverte:master
+#
+
+repo=$1
+
+cd ~/Sites/mbeall.local/wp-content/themes/flint
+hub pull-request -b mbeall/$repo:master -h starverte/$repo:master -m "Merge from master [ci skip]"
+sleep 1
+
+hub pull-request -b starverte/$repo:dev -h mbeall/$repo:master -m "Pull request [ci skip]"
+sleep 1
+
+hub pull-request -b starverte/$repo:master -h starverte/$repo:dev -m "$repo x.x.x"
+

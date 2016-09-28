@@ -1,0 +1,17 @@
+#!/usr/local/bin/bash
+#
+# Update all npm dependencies
+#
+
+status=$(echo /tmp/npmg-update-$(date +%Y-%m-%d-%H-%M-%S))
+
+for repo in $(cat ~/.local/npm-repositories | grep mbeall)
+do
+  cd $repo
+  echo $(basename $repo) >> $status
+  npm update >> $status
+  echo >> $status
+done
+
+less $status
+

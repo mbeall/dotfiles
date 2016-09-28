@@ -1,0 +1,36 @@
+#!/usr/local/bin/bash
+#
+# Batch pull request for all repositories
+#
+# 1. Merge starverte:master into mbeall:master
+# 2. Merge mbeall:master into starverte:dev
+# 3. Merge starverte:dev into starverte:master
+#
+
+for repo in $(cat ~/.local/git-repositories | grep mbeall)
+do
+  cd $repo
+  echo $(basename $repo)
+  hub pull-request -b mbeall/$(basename $repo):master -h starverte/$(basename $repo):master -m "Merge from master [ci skip]"
+  echo
+  sleep 1
+done
+
+for repo in $(cat ~/.local/git-repositories | grep mbeall)
+do
+  cd $repo
+  echo $(basename $repo)
+  hub pull-request -b starverte/$(basename $repo):dev -h mbeall/$(basename $repo):master -m "Pull request [ci skip]"
+  echo
+  sleep 1
+done
+
+for repo in $(cat ~/.local/git-repositories | grep starverte)
+do
+  cd $repo
+  echo $(basename $repo)
+  hub pull-request -b starverte/$(basename $repo):master -h starverte/$(basename $repo):dev -m "$(basename $repo) x.x.x"
+  echo
+  sleep 1
+done
+

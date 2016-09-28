@@ -1,0 +1,17 @@
+#!/usr/local/bin/bash
+#
+# Get status of all repos
+#
+
+status=$(echo /tmp/gitg-status-$(date +%Y-%m-%d-%H-%M-%S))
+
+for repo in $(cat ~/.local/git-repositories)
+do
+  cd $repo
+  echo $(basename $repo) >> $status
+  git status >> $status
+  echo >> $status
+done
+
+less $status
+

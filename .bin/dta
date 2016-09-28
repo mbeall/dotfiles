@@ -1,0 +1,27 @@
+#!/usr/local/bin/bash
+# Calculate the average between two day times
+
+if gdate -d $1 &> /dev/null; then
+  one=$(gdate -d $1 +"%s")
+else
+  echo "$1 is not a valid date."
+  one=''
+fi 
+
+if gdate -d $2 &> /dev/null; then
+  two=$(gdate -d $2 +"%s")
+else
+  echo "$2 is not a valid date."
+  two=''
+fi
+
+if [[ -n $one ]] || [[ -n $two ]]; then
+  min=$(( $one < $two ? $one : $two ))
+  max=$(( $one < $two ? $two : $one ))
+
+  diff=$(( max - min ))
+  avg=$(( diff / 2 + min ))
+
+  echo "The average time between $1 and $2 is $(gdate -d @$avg)"
+fi
+

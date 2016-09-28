@@ -1,0 +1,20 @@
+#!/usr/local/bin/bash
+#
+# Make sure all git repos are in sync with GitHub
+#
+
+status=$(echo /tmp/gitg-sync-$(date +%Y-%m-%d-%H-%M-%S))
+
+for repo in $(cat ~/.local/git-repositories)
+do
+  cd $repo
+  echo $(basename $repo) >> $status
+  git pull >> $status
+  git push >> $status
+  echo >> $status
+done
+
+less $status
+
+npmg-update
+
