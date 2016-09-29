@@ -116,6 +116,7 @@ brew install python
 brew install ruby
 brew install homebrew/dupes/srm
 brew link srm --force
+brew install nvm
 
 # Replace system shells
 # Don't forget to change /etc/shells
