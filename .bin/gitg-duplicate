@@ -1,0 +1,17 @@
+#!/usr/local/bin/bash
+#
+# Duplicate file across all git repositories
+#
+
+if [ -f $1 ]; then
+  for repo in $(cat ~/.local/git-repositories)
+  do
+    cd $repo
+    echo $(basename $repo)
+    cp -p $1 ./$1
+  done
+else
+  echo 'Usage: gitg-duplicate <file>'
+  exit 1
+fi
+
