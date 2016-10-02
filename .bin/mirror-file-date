@@ -1,0 +1,17 @@
+#!/usr/local/bin/bash
+#
+# Set file's created date to match modified date
+#
+
+if [ -d $1 ]; then
+  for file in $1/*
+  do
+    SetFile -d "$(date -j -f'%m/%d/%Y %H:%M:%S' "$(GetFileInfo -m $file)" "+%m/%d/%Y %H:%M:%S")" $file 
+  done
+elif [ -f $1 ]; then
+  SetFile -d "$(date -j -f'%m/%d/%Y %H:%M:%S' "$(GetFileInfo -m $file)" "+%m/%d/%Y %H:%M:%S")" $1
+else
+  echo 'Usage: mirror-file-date <dir|file>'
+  exit 1
+fi
+
