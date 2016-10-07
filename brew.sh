@@ -118,6 +118,17 @@ brew install homebrew/dupes/srm
 brew link srm --force
 brew install nvm
 
+# Install EditorConfig
+brew install editorconfig
+if [ -z ~/.vim ]; then
+  mkdir ~/.vim
+fi
+git clone https://github.com/editorconfig/editorconfig-vim.git editorconfig-vim
+cp -r editorconfig-vim/autoload ~/.vim/autoload
+cp -r editorconfig-vim/doc ~/.vim/doc
+cp -r editorconfig-vim/plugin ~/.vim/plugin
+rm -rf editorconfig-vim
+
 # Replace system shells
 # Don't forget to change /etc/shells
 brew install ksh
