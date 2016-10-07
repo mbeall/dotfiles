@@ -32,3 +32,7 @@ export MANPAGER='less -X';
 # Load NVM
 export NVM_DIR="$HOME/.nvm"
 . "$(brew --prefix nvm)/nvm.sh"
+
+# Dim user tag
+export PS1='\[\e[2m\]\u@\h:\[\e[22;1;34m\]\W \e[2;21;39m$\[\e[m\] '
+
