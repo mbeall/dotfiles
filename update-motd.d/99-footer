@@ -1,0 +1,4 @@
+#!/bin/sh
+exec figlet -f standard $(hostname)
+printf "\n"
+
