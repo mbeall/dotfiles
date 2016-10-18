@@ -1,0 +1,27 @@
+#!/bin/bash
+# Backup all sites
+#
+
+for path in $(cat /usr/local/backup-sites)
+do
+
+  bk_date=$(date +%Y-%m)
+  site=$(basename $(dirname "$path/html"))
+  file=$(echo $bk_date\-$site) 
+  user=$(stat -c '%U' $path)
+  
+  cd $path
+  echo "Backing up $site..."
+  tar -zcf backup/$file.tgz html
+
+  if test -e $path/backup/$file.tgz; then
+    echo "success!"
+    chown $user:$user $path/backup/$file.tgz
+  else
+    echo "BACKUP FAILED"
+  fi
+
+  echo
+
+done
+

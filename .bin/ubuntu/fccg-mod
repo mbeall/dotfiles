@@ -1,0 +1,26 @@
+#!/bin/bash
+# Get permissions in check
+
+for user in $(ls /home)
+do
+  echo "Changing ownership for $user..."
+  chown -R $user:$user /home/$user/public/*
+  echo "Done."
+  echo
+done
+
+for path in $(cat /usr/local/fcc-sites)
+do
+  site=$(basename $(dirname "$path/html"))
+  echo "Changing group ownership for $site..."
+  chgrp -R www-data $path
+  echo "...changing file permissions for $site..."
+  find $path -type d -print0 | xargs -0 chmod 775
+  find $path -type f -print0 | xargs -0 chmod 664
+  if [ -e $path/wp-config.php ]; then
+    chmod 660 $path/wp-config.php
+  fi
+  echo "Done."
+  echo
+done
+

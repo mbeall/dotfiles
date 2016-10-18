@@ -1,0 +1,24 @@
+#!/bin/bash
+# Send out email with information about available updates
+
+status=$(echo /tmp/git-sync-$(date +%Y-%m-%d-%H-%M-%S))
+
+touch $status
+
+for path in $(cat /usr/local/wp-sites)
+do
+
+if test -e $path/wp-config.php; then
+
+  cd $path/html
+  site=$(basename $(dirname "$path/html"))
+
+  echo $site >> $status
+
+  # Email plugin and theme statuses
+  tail wp-content/debug.log | mail -s "[debug.log] $site" mbeall@starverte.com
+
+fi
+
+done
+
