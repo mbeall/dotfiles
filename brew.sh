@@ -132,11 +132,8 @@ brew install tcsh
 brew install zsh
 
 # Install some apps
-brew cask install audacity
-brew cask install dropbox
-brew cask install filezilla
 brew cask install firefox
-brew cask install fontforge
+#brew cask install fontforge
 brew cask install google-chrome
 brew cask install malwarebytes-anti-malware
 brew cask install opera
