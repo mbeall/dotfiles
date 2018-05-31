@@ -3,7 +3,7 @@
 # Get status of all repos
 #
 
-status=$(echo /tmp/gitg-status-$(date +%Y-%m-%d-%H-%M-%S))
+status=$(echo /tmp/git-status-$(date +%Y-%m-%d-%H-%M-%S))
 
 for repo in $(cat ~/.local/git-repositories)
 do

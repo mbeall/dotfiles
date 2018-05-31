@@ -7,17 +7,14 @@
 # 3. Merge starverte:dev into starverte:master
 #
 
-if [ -d $1 ]
-then
-  repo=$(basename $1)
-  cd $1
-  hub pull-request -b mbeall/$repo:master -h starverte/$repo:master -m "Merge from master [ci skip]"
-  sleep 1
-  hub pull-request -b starverte/$repo:dev -h mbeall/$repo:master -m "Pull request [ci skip]"
-  sleep 1
-  hub pull-request -b starverte/$repo:master -h starverte/$repo:dev -m "$1 x.x.x"
-else
-  echo 'Usage git-pr <repo>'
-  exit 1
-fi
+repo=$1
+
+cd /Users/mbeall/Sites/mbeall.local/html/wp-content/themes/flint
+hub pull-request -b mbeall/$repo:master -h starverte/$repo:master -m "Merge from master [ci skip]"
+sleep 1
+
+hub pull-request -b starverte/$repo:dev -h mbeall/$repo:master -m "Pull request [ci skip]"
+sleep 1
+
+hub pull-request -b starverte/$repo:master -h starverte/$repo:dev -m "$repo x.x.x"
 

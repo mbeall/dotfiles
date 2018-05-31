@@ -1,14 +1,15 @@
 #!/usr/local/bin/bash
 #
-# Update npm dependencies on all repositories
+# Install npm dependencies on all repositories
 #
 
-status=$(echo /tmp/npm-update-$(date +%Y-%m-%d-%H-%M-%S))
+status=$(echo /tmp/npm-install-$(date +%Y-%m-%d-%H-%M-%S))
 
 for repo in $(cat /Users/mbeall/.local/npm-repositories | grep mbeall)
 do
   cd $repo
   echo $(basename $repo) >> $status
+  npm install >> $status
   npm update >> $status
   echo >> $status
 done

@@ -1,0 +1,7 @@
+#!/usr/local/bin/bash
+# Get genres for an app
+
+data=$(curl "https://itunes.apple.com/search?term=$1&country=us&entity=software&limit=1" -s | jq '.results[].genres[]')
+
+echo "$1" $data >> ~/app.list
+echo "$1" $data

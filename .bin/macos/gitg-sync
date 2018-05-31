@@ -3,9 +3,9 @@
 # Make sure all git repos are in sync with GitHub
 #
 
-status=$(echo /tmp/gitg-sync-$(date +%Y-%m-%d-%H-%M-%S))
+status=$(echo /tmp/git-sync-$(date +%Y-%m-%d-%H-%M-%S))
 
-for repo in $(cat ~/.local/git-repositories)
+for repo in $(cat /Users/mbeall/.local/git-repositories)
 do
   cd $repo
   echo $(basename $repo) >> $status
