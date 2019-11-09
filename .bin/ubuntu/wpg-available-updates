@@ -1,23 +1,19 @@
 #!/bin/bash
-# Send out email with information about available updates
+#
+# Send out emails with information about available updates for all WordPress sites
+#
 
-status=$(echo /tmp/git-sync-$(date +%Y-%m-%d-%H-%M-%S))
-
-touch $status
-
-for path in $(cat /usr/local/wp-sites)
+for user in $(ls /home)
 do
+  for site in $(ls /home/$user/public)
+  do
+    if [ -e /home/$user/public/$site/wp-config.php ]
+    then
+      cd /home/$user/public/$site/html
 
-if test -e $path/wp-config.php; then
-
-  cd $path/html
-  site=$(basename $(dirname "$path/html"))
-
-  echo $site >> $status
-
-  # Email plugin and theme statuses
-  echo -e "Plugins: \n $(wp plugin update --all --dry-run --url="https://$site") \n \n Themes: \n $(wp theme update --all --dry-run --url="https://$site") \n \n Go to https://$site/wp-admin/update-core.php to update" | mail -s "$site Available Updates" mbeall@starverte.com
-
-fi
-
+      # Email plugin and theme statuses
+      echo -e "Plugins: \n $(wp plugin update --all --dry-run --url="https://$site") \n \n Themes: \n $(wp theme update --all --dry-run --url="https://$site") \n \n Go to https://$site/wp-admin/update-core.php to update" | mail -s "$site Available Updates" mbeall@starverte.com
+    fi
+  done
 done
+

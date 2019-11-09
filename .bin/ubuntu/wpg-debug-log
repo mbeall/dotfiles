@@ -1,24 +1,16 @@
 #!/bin/bash
-# Send out email with information about available updates
+#
+# Batch Email Debug Logs
+#
 
-status=$(echo /tmp/git-sync-$(date +%Y-%m-%d-%H-%M-%S))
-
-touch $status
-
-for path in $(cat /usr/local/wp-sites)
+for path in $(cat /usr/local/sitelist.md)
 do
+  if test -e $path/wp-config.php; then
+    cd $path/html/wp-content
+    site=$(basename $path)
 
-if test -e $path/wp-config.php; then
-
-  cd $path/html
-  site=$(basename $(dirname "$path/html"))
-
-  echo $site >> $status
-
-  # Email plugin and theme statuses
-  tail wp-content/debug.log | mail -s "[debug.log] $site" mbeall@starverte.com
-
-fi
-
+    # Email plugin and theme statuses
+    tail debug.log | mail -s "[debug.log] $site" mbeall@starverte.com
+  fi
 done
 
